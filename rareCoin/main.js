@@ -1,13 +1,12 @@
 const SHA256 = require('crypto-js/sha256');
-
 class Block {
     constructor(index, timestamp, data, previousHash = ''){
         this.index = index;
         this.timestamp = timestamp;
         this.data = data;
         this.previousHash = previousHash;
-        this.hash = this.calculateHash();
         this.nonce = 0;
+        this.hash = this.calculateHash();
     }
 
     calculateHash(){
@@ -62,6 +61,7 @@ rareCoin.addBlock(new Block(2, "11/11/2021", {amount: 10}))
 // rareCoin.showChain();
 // console.log(rareCoin.isChainValid());
 rareCoin.chain[1]['data'] = {amount: 400 };
+rareCoin.chain[1]['hash'] = rareCoin.chain[1].calculateHash();
 rareCoin.chain[2]['previousHash'] = rareCoin.chain[1]['hash'];
 console.log(rareCoin.isChainValid());
 rareCoin.showChain();
